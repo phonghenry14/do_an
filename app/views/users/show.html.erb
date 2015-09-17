@@ -6,8 +6,12 @@
         <%= @user.name %>
       </h1>
     </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
   </aside>
   <div class="col-md-8">
+    <%= render 'follow_form' %>
     <% if @user.statuses.any? %>
       <h3>Statuses (<%= @user.statuses.count %>)</h3>
       <ol class="statuses">
