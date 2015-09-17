@@ -97,6 +97,10 @@ footer {
   }
 }
 
+.dropdown {
+  @extend .dropdown;
+}
+
 /* sidebar */
 
 aside {
@@ -137,3 +141,4 @@ aside {
 /* mixins, variables, etc. */
 
 $gray-medium-light: #eaeaea;
+
