@@ -18,6 +18,26 @@ class StatusesController < ApplicationController
     redirect_to request.referrer || root_url
   end
 
+  def like
+    @status = Status.find(params[:id])
+    @status.liked_by current_user
+    if request.xhr?
+      render json: { count: @status.get_likes.size, id: params[:id] }
+    else
+      redirect_to @status
+    end
+  end
+
+  def unlike
+    @status= Status.find(params[:id])
+    @status.unliked_by current_user
+    if request.xhr?
+      render json: { count: @status.get_likes.size, id: params[:id] }
+    else
+      redirect_to @status
+    end
+  end
+
   private
   def status_params
     params.require(:status).permit(:content, :picture)

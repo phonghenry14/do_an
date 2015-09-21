@@ -7,9 +7,9 @@
     following
   </a>
   <a href="<%= followers_user_path(@user) %>">
-    <strong id="followers" class="stat">
+    <span class="follows-count" data-id="<%= @user.id %>">
       <%= @user.followers.count %>
-    </strong>
+    </span>
     followers
   </a>
 </div>
