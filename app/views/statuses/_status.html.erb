@@ -1,14 +1,17 @@
 <li id="<%= status.id %>">
-  <span class="user"><%= link_to status.user.name, status.user %></span></br>
-  <span class="content">
-    <%= status.content %></br>
-    <%= image_tag status.picture.url if status.picture? %>
+  <span class="user">
+    <%= gravatar_for status.user, size: 30 %>
+    <%= link_to status.user.name, status.user %>
   </span></br>
   <span class="timestamp">
     Posted <%= time_ago_in_words(status.created_at) %> ago.
     <% if current_user? status.user %>
       <%= link_to "delete", status, method: :delete, data: {confirm: "You sure?"} %>
     <% end %>
+  </span></br>
+  <span class="content">
+    <%= status.content %></br>
+    <%= image_tag status.picture.url if status.picture? %>
   </span></br>
   <span>
     <% if current_user.liked? status %>
