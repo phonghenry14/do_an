@@ -3,6 +3,7 @@
   <span class="content">
     <%= status.content %></br>
     <%= image_tag status.picture.url if status.picture? %>
+    <%= commontator_thread(status) %>
   </span></br>
   <span class="timestamp">
     Posted <%= time_ago_in_words(status.created_at) %> ago.
