@@ -1,19 +1,21 @@
 class RelationshipsController < ApplicationController
-  def create
-    user = User.find(params[:followed_id])
+  def follow
+    user = User.find(params[:id])
     current_user.follow(user)
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
+    if request.xhr?
+      render json: { count: user.followers.count, id: params[:id] }
+    else
+      redirect_to user
     end
   end
 
-  def destroy
-    user = Relationship.find(params[:id]).followed
+  def unfollow
+    user = User.find(params[:id])
     current_user.unfollow(user)
-    respond_to do |format|
-      format.html { redirect_to @user }
-      format.js
+    if request.xhr?
+      render json: { count: user.followers.count, id: params[:id] }
+    else
+      redirect_to user
     end
   end
 end

@@ -17,6 +17,16 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :statuses, only: [:create, :destroy]
-  resources :relationships, only: [:create, :destroy]
+  resources :statuses, only: [:create, :destroy] do
+    member do
+        put "like", to: "statuses#like"
+        put "unlike", to: "statuses#unlike"
+    end
+  end
+  resources :relationships, only: [:create, :destroy] do
+    member do
+        put "follow", to: "relationships#follow"
+        put "unfollow", to: "relationships#unfollow"
+    end
+  end
 end

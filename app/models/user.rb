@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
 
   acts_as_commontator
+  acts_as_voter
 
   def feed
     following_ids = "SELECT followed_id FROM relationships

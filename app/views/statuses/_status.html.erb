@@ -3,12 +3,23 @@
   <span class="content">
     <%= status.content %></br>
     <%= image_tag status.picture.url if status.picture? %>
-    <%= commontator_thread(status) %>
   </span></br>
   <span class="timestamp">
     Posted <%= time_ago_in_words(status.created_at) %> ago.
     <% if current_user? status.user %>
       <%= link_to "delete", status, method: :delete, data: {confirm: "You sure?"} %>
     <% end %>
+  </span></br>
+  <span>
+    <% if current_user.liked? status %>
+      <%= link_to "Unlike", unlike_status_path(status), class: 'vote', method: :put, remote: true, data: { toggle_text: 'Like', toggle_href: like_status_path(status), id: status.id } %>
+    <% else %>
+      <%= link_to "Like", like_status_path(status), class: 'vote', method: :put, remote: true, data: { toggle_text: 'Unlike', toggle_href: unlike_status_path(status), id: status.id } %>
+    <% end %>
+    <%= commontator_thread(status) %>
   </span>
+  <span class="votes-count" data-id="<%= status.id %>">
+    <%= status.get_likes.size %>
+  </span>
+  users like this
 </li>
