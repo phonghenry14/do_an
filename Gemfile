@@ -18,6 +18,8 @@ gem "fog",                     "1.26.0"
 gem "faker"
 gem "commontator"
 gem "acts_as_votable"
+gem "private_pub"
+gem "thin"
 
 group :development, :test do
   gem "pry-debugger"

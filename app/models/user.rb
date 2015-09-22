@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         stretches: 20
 
   has_many :statuses, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",
@@ -11,6 +12,8 @@ class User < ActiveRecord::Base
                                    dependent:   :destroy
   has_many :following, through: :active_relationships,  source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+  has_many :conversations, foreign_key: :sender_id
+  has_many :messages
 
   acts_as_commontator
   acts_as_voter
@@ -35,5 +38,13 @@ class User < ActiveRecord::Base
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def online?
+    if current_sign_in_at.present?
+      last_sign_out_at.present? ? current_sign_in_at > last_sign_out_at : true
+    else
+      false
+    end
   end
 end

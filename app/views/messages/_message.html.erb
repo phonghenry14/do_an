@@ -1,0 +1,12 @@
+<li class="media">
+  <div class="media-left">
+    <%= gravatar_for message.user, size: 20, class: "media-object" %>
+    <b><%= message.user.name %></b>
+  </div>
+  <div class="media-body">
+    <p><%= message.content %></p>
+    <time datetime="<%= message.created_at %>" title="<%= message.created_at %>">
+      <i><%= message.created_at.strftime "%H:%M %p"%></i>
+    </time>
+  </div>
+</li>

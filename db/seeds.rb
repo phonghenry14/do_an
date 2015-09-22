@@ -5,28 +5,21 @@ User.create!(name:  "Phong Henry",
              password_confirmation: "nhiepphong",
 )
 
-99.times do |n|
-  name  = Faker::Name.name
-  email = "example-#{n+1}@railstutorial.org"
-  password = "password"
-  User.create!(name: name,
-              email: email,
-              password:              password,
-              password_confirmation: password
-              )
-end
+User.create!(name:  "Phong Henry 2",
+             email: "phonghenry1412@gmail.com",
+             password:              "nhiepphong",
+             password_confirmation: "nhiepphong",
+)
 
 # Statuses
 users = User.order(:created_at).take(6)
-50.times do
+10.times do
   content = Faker::Lorem.sentence(5)
   users.each { |user| user.statuses.create!(content: content) }
 end
 
 # Following relationships
-users = User.all
-user  = users.first
-following = users[2..50]
-followers = users[3..40]
-following.each { |followed| user.follow(followed) }
-followers.each { |follower| follower.follow(user) }
+user1 = User.first
+user2 = User.last
+user1.follow(user2)
+user2.follow(user1)
