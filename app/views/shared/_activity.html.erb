@@ -1,0 +1,27 @@
+<div class="col-sm-12">
+<ul class="list-group">
+  <% @activities.each do |activity| %>
+    <li style="list-style: none;">
+      <% if activity.owner %>
+        <strong>
+          <%= gravatar_for activity.owner, size: 15 %>
+          <%= activity.owner.name %>
+        </strong>
+      <% else %>
+        <strong>Guest%></strong>
+      <% end %>
+      <%= render_activity activity, display: :i18n %>
+      <% if activity.trackable %>
+        "<%= link_to activity.trackable.name, status_path(activity.trackable) %>"
+      <% else %>
+        with unknown title.
+      <% end %>
+      </br>
+      <span class="glyphicon glyphicon-<%= activity.key.match(/\.(.*)/)[1] %>">
+        <small class="text-muted"><%= time_ago_in_words(activity.created_at) %> ago.</small>
+      </span>
+    </li>
+    <hr>
+  <% end %>
+  </ul>
+</div>

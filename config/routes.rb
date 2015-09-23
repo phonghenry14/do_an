@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
-  resources :statuses, only: [:create, :destroy] do
+  resources :statuses, only: [:show, :create, :destroy] do
     member do
         put "like", to: "statuses#like"
         put "unlike", to: "statuses#unlike"

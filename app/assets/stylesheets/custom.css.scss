@@ -221,3 +221,22 @@ span.picture {
 .group {
   padding-left: 0;
 }
+
+.glyphicon-update {
+  @extend .glyphicon-edit;
+}
+
+.glyphicon-create {
+  @extend .glyphicon-plus;
+}
+
+.glyphicon-destroy {
+  @extend .glyphicon-remove;
+}
+
+.glyphicon-like {
+  @extend .glyphicon-thumbs-up;
+}
+.glyphicon-unlike {
+  @extend .glyphicon-thumbs-down;
+}

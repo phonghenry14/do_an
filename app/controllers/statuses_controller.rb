@@ -1,6 +1,11 @@
 class StatusesController < ApplicationController
   before_action :correct_user, only: :destroy
 
+  def show
+    @status = Status.find params[:id]
+    @user = current_user
+  end
+
   def create
     @status = current_user.statuses.build(status_params)
     if @status.save
@@ -19,8 +24,9 @@ class StatusesController < ApplicationController
   end
 
   def like
-    @status = Status.find(params[:id])
+    @status = Status.find params[:id]
     @status.liked_by current_user
+    @status.create_activity key: "status.like"
     if request.xhr?
       render json: { count: @status.get_likes.size, id: params[:id] }
     else
@@ -29,8 +35,9 @@ class StatusesController < ApplicationController
   end
 
   def unlike
-    @status= Status.find(params[:id])
+    @status= Status.find params[:id]
     @status.unliked_by current_user
+    @status.create_activity key: "status.unlike"
     if request.xhr?
       render json: { count: @status.get_likes.size, id: params[:id] }
     else

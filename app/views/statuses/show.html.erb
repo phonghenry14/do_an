@@ -1,0 +1,33 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="col-md-3">
+    <section class="user_info">
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %></br></br>
+        <% if @user.online? %>
+          <span class="glyphicon glyphicon-user text-success"></span>
+          Online
+        <% else %>
+          <span class="glyphicon glyphicon-user"></span>
+          Offline
+        <% end %>
+      </h1>
+    </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+    <section class="group">
+      <%= render 'shared/group' %>
+    </section>
+  </aside>
+  <aside class="col-md-7">
+      <ol class="statuses">
+        <%= render @status %>
+      </ol>
+  </aside>
+  <aside class="col-md-2">
+    <%= render 'shared/friend_online' %>
+  </aside>
+</div>
+

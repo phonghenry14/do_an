@@ -20,6 +20,7 @@ gem "commontator"
 gem "acts_as_votable"
 gem "private_pub"
 gem "thin"
+gem "public_activity"
 
 group :development, :test do
   gem "pry-debugger"
