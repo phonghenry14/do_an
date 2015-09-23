@@ -3,4 +3,4 @@
   <%= current_user.name %>
 </h1>
 <span><%= link_to "view my profile", current_user %></span>
-<span><%= pluralize(current_user.statuses.count, "status") %></span>
+<span><%= pluralize(current_user.statuses.status_not_group.count, "status") %></span>

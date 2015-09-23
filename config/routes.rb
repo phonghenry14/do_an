@@ -33,4 +33,9 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+
+  resources :groups do
+    resource :user_groups
+    get "add_members" => "user_groups#show"
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921085137) do
+ActiveRecord::Schema.define(version: 20150923030648) do
 
   create_table "commontator_comments", force: :cascade do |t|
     t.string   "creator_type",      limit: 255
@@ -62,6 +62,14 @@ ActiveRecord::Schema.define(version: 20150921085137) do
     t.datetime "updated_at",            null: false
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "admin_id",    limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text     "content",         limit: 65535
     t.integer  "conversation_id", limit: 4
@@ -90,10 +98,18 @@ ActiveRecord::Schema.define(version: 20150921085137) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "picture",    limit: 255
+    t.integer  "group_id",   limit: 4
   end
 
   add_index "statuses", ["user_id", "created_at"], name: "index_statuses_on_user_id_and_created_at", using: :btree
   add_index "statuses", ["user_id"], name: "index_statuses_on_user_id", using: :btree
+
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   limit: 255, default: "", null: false
