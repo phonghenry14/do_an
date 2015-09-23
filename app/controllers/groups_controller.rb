@@ -3,7 +3,7 @@ class GroupsController < ApplicationController
 
   def show
     @admin = @group.admin
-    @statuses = @group.statuses.build
+    @group.statuses.build
     @feeds = []
     @group.users.each do|user|
       user.statuses.status_in_group(@group.id).each do |status|
@@ -48,8 +48,8 @@ class GroupsController < ApplicationController
   private
   def group_params
     params.require(:group).permit :name, :description, :admin_id, user_ids: [],
-      user_groups_attributes: [:id, :user_id, :group_id, :_destroy],
-      statuses_attributes: [:id, :group_id, :user_id, :content, :picture, :_destroy]
+      user_groups_attributes: [:id, :user_id, :group_id],
+      statuses_attributes: [:id, :group_id, :user_id, :content, :picture]
   end
 
   def set_group
