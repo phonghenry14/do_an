@@ -15,13 +15,18 @@ class User < ActiveRecord::Base
   has_many :conversations, foreign_key: :sender_id
   has_many :messages
 
+  has_many :user_groups, dependent: :destroy
+  has_many :groups, through: :user_groups
+
+  has_one :admin_group, foreign_key: "admin_id"
+
   acts_as_commontator
   acts_as_voter
 
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
-    Status.where("user_id IN (#{following_ids})
+    Status.status_not_group.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
 

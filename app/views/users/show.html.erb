@@ -17,11 +17,14 @@
     <section class="stats">
       <%= render 'shared/stats' %>
     </section>
+    <section class="group">
+      <%= render 'shared/group' %>
+    </section>
   </aside>
   <aside class="col-md-7">
     <%= render 'follow_form' %>
     <% if @user.statuses.any? %>
-      <h3>Statuses (<%= @user.statuses.count %>)</h3>
+      <h3>Statuses (<%= @user.statuses.status_not_group.count %>)</h3>
       <ol class="statuses">
         <%= render @statuses %>
       </ol>

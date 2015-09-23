@@ -1,0 +1,19 @@
+<% provide :title, "Add member" %>
+<h1>Add member</h1>
+<h3><%= link_to @group.name, @group %></h3>
+<%= form_for @group do |f| %>
+  <%= render "shared/error_messages", object: f.object %>
+  <div class="row">
+    <table class="table">
+      <%= f.collection_check_boxes :user_ids, User.all, :id, :name do |b| %>
+        <tr>
+          <%= b.label do %>
+            <th><%= b.text %></th>
+            <th class="selection_checkbox"><%= b.check_box %></th>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+  <%= f.submit "Submit", class: "btn btn-primary" %>
+<% end %>

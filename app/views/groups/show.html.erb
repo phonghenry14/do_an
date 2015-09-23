@@ -1,0 +1,72 @@
+<% provide :title, @group.name %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        Group:
+        <%= @group.name %>
+      </h1>
+      <h4>
+        Admin name:
+        <%= @admin.name %><br/>
+        Description:
+        <%= @group.description %><br/>
+      </h4>
+    </section>
+    <% if current_user == @admin %>
+      <section>
+        <%= link_to "Add Members", group_add_members_path(@group), class:"btn btn-success btn-sm" %>
+        <%= link_to "Edit Group", edit_group_path(@group), class:"btn btn-primary btn-sm" %>
+        <%= link_to "Delete Group", group_path(@group), method: :delete, data: {confirm: "Are you sure?"}, class:"btn btn-danger btn-sm" %>
+      </section>
+    <% end %>
+    <section class="group_info">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User name</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: "user", collection: @group.users %>
+        </tbody>
+      </table>
+    </section>
+  </aside>
+  <aside class="col-md-6">
+    <h3>Statuses Feed</h3>
+      <section class="micropost_form">
+        <%= form_for @group, html: {multipart: true} do |f| %>
+          <%= render 'shared/error_messages', object: f.object %>
+          <%= f.fields_for :statuses do |p| %>
+            <div class="field">
+              <%= p.hidden_field :user_id, value: current_user.id %>
+              <%= p.text_area :content, placeholder: "Compose new status...", class: "form-control" %>
+              <span class="picture">
+                <%= p.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+              </span>
+            </div>
+          <% end %>
+          <%= f.submit "Post", class: "btn btn-primary" %>
+        <% end %>
+      </section>
+      <ol class="sttuses">
+        <% @feeds.each do |feed| %>
+          <%= render 'statuses/status', status: feed %>
+        <% end %>
+      </ol>
+  </aside>
+  <aside class="col-md-2">
+    <%= render 'shared/friend_online' %>
+  </aside>
+</div>
+
+<script type="text/javascript">
+  $('#status_picture').bind('change', function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>

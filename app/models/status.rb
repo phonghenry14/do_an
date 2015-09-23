@@ -1,5 +1,6 @@
 class Status < ActiveRecord::Base
   belongs_to :user
+  belongs_to :group
 
   default_scope -> {order(created_at: :desc)}
 
@@ -11,6 +12,9 @@ class Status < ActiveRecord::Base
 
   acts_as_commontable
   acts_as_votable
+
+  scope :status_not_group, ->{where group_id: nil}
+  scope :status_in_group, ->(group_id){where group_id: group_id}
 
   private
   # Validates the size of an uploaded picture.
