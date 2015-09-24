@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root             "static_pages#home"
   mount Commontator::Engine => '/commontator'
+  mount Soulmate::Server, :at => "/autocomplete"
 
   get "help"    => "static_pages#help"
   get "about"   => "static_pages#about"

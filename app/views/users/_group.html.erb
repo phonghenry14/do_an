@@ -1,0 +1,5 @@
+<li>
+  <%= link_to "Join Group", "#", class: "btn-sm btn-success" if group.user_ids.include? current_user.id  %>
+  <%= link_to group.name, group %>
+  <%= group.description %>
+</li>

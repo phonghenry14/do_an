@@ -21,6 +21,8 @@ gem "acts_as_votable"
 gem "private_pub"
 gem "thin"
 gem "public_activity"
+gem 'soulmate', :require => 'soulmate/server'
+gem "rack-contrib"
 
 group :development, :test do
   gem "pry-debugger"

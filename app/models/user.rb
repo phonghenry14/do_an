@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  after_save :load_into_soulmate
+  before_destroy :remove_from_soulmate
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          stretches: 20
@@ -51,5 +54,27 @@ class User < ActiveRecord::Base
     else
       false
     end
+  end
+
+  def self.search search
+    if search
+      User.where("name LIKE ?", "%#{search}%")
+    else
+      User.all
+    end
+  end
+
+  private
+
+  def load_into_soulmate
+    loader = Soulmate::Loader.new("users")
+    loader.add("term" => name, "id" => self.id, "data" => {
+      "link" => Rails.application.routes.url_helpers.user_path(self)
+      })
+  end
+
+  def remove_from_soulmate
+    loader = Soulmate::Loader.new("users")
+      loader.remove("id" => self.id)
   end
 end

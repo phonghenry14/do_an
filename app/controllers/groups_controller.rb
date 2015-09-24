@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
         @feeds << status
       end
     end
+    @user_list = @group.users
   end
 
   def new
