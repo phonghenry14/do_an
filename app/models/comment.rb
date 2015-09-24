@@ -1,26 +1,19 @@
-class Status < ActiveRecord::Base
+class Comment < ActiveRecord::Base
   include PublicActivity::Model
   tracked owner: Proc.new { |controller, model| controller.current_user ? controller.current_user : nil }
 
-  belongs_to :user
-  belongs_to :group
-
-  has_many :comments
-
-  accepts_nested_attributes_for :comments, allow_destroy: :true
-
-  default_scope -> {order(created_at: :desc)}
-
   mount_uploader :picture, PictureUploader
+
+  belongs_to :user
+  belongs_to :status
 
   validates :user_id, presence: true
   validates :content, presence: true, length: {maximum: 140}
   validate  :picture_size
 
-  acts_as_votable
+  default_scope -> {order(created_at: :desc)}
 
-  scope :status_not_group, ->{where group_id: nil}
-  scope :status_in_group, ->(group_id){where group_id: group_id}
+  acts_as_votable
 
   def name
     content.split(//).first(30).join

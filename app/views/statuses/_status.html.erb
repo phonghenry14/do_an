@@ -8,7 +8,7 @@
     <% if current_user? status.user %>
       <%= link_to "delete", status, method: :delete, data: {confirm: "You sure?"} %>
     <% end %>
-  </span></br></br>
+  </span></br>
   <span class="content">
     <%= status.content %></br>
     <%= image_tag status.picture.url if status.picture? %>
@@ -19,10 +19,33 @@
     <% else %>
       <%= link_to "Like", like_status_path(status), class: 'vote', method: :put, remote: true, data: { toggle_text: 'Unlike', toggle_href: unlike_status_path(status), id: status.id } %>
     <% end %>
-    <%= commontator_thread(status) %>
   </span>
   <span class="votes-count" data-id="<%= status.id %>">
     <%= status.get_likes.size %>
   </span>
-  users like this
+  Likes</br></br>
+  Comments:</br>
+  <span calss="comment">
+    <% status.comments.each do |comment| %>
+      <%= gravatar_for comment.user, size: 15 %>
+      <%= link_to comment.user.name, comment.user %>:
+      <%= comment.content %></br>
+      <%= image_tag comment.picture.url if comment.picture? %>
+      </br><%= time_ago_in_words(comment.created_at) %>
+      <%= link_to "delete", status_comment_path(status, comment), method: :delete, data: {confirm: "You sure?"} %>
+      </br></br>
+    <% end %>
+  </span>
+  <% @comment = Comment.new %>
+  <%= form_for [status, @comment] do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+      <div class="field">
+        <%= f.hidden_field :status_id, value: status.id %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.text_field :content, placeholder: "Compose new status..." %>
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      </div>
+    <%= f.submit "Comment", class: "btn btn-primary" %>
+  <% end %>
 </li>
+<hr>

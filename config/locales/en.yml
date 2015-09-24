@@ -6,3 +6,8 @@ en:
       update: 'has edited the status'
       like: "has liked the status"
       unlike: "has unlike the status"
+    comment:
+      create: "has comment in status"
+      destroy: "has removed comment in status"
+      like: "has liked the comment"
+      unlike: "has unliked the comment"

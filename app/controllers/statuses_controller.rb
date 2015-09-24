@@ -3,17 +3,25 @@ class StatusesController < ApplicationController
 
   def show
     @status = Status.find params[:id]
+    @status.comments.build
     @user = current_user
   end
 
   def create
-    @status = current_user.statuses.build(status_params)
+    @status = current_user.statuses.build status_params
     if @status.save
       flash[:success] = "Status created!"
       redirect_to root_url
     else
       @feed_items = []
       render "static_pages/home"
+    end
+  end
+
+  def update
+    @status = Status.find params[:id]
+    if @status.update_attributes status_params
+      redirect_to :back
     end
   end
 
@@ -28,7 +36,7 @@ class StatusesController < ApplicationController
     @status.liked_by current_user
     @status.create_activity key: "status.like"
     if request.xhr?
-      render json: { count: @status.get_likes.size, id: params[:id] }
+      render json: {count: @status.get_likes.size, id: params[:id]}
     else
       redirect_to @status
     end
@@ -39,7 +47,7 @@ class StatusesController < ApplicationController
     @status.unliked_by current_user
     @status.create_activity key: "status.unlike"
     if request.xhr?
-      render json: { count: @status.get_likes.size, id: params[:id] }
+      render json: {count: @status.get_likes.size, id: params[:id]}
     else
       redirect_to @status
     end
@@ -47,7 +55,7 @@ class StatusesController < ApplicationController
 
   private
   def status_params
-    params.require(:status).permit(:content, :picture)
+    params.require(:status).permit :content, :picture
   end
 
   def correct_user

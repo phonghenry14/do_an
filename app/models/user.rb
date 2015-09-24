@@ -14,13 +14,13 @@ class User < ActiveRecord::Base
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :conversations, foreign_key: :sender_id
   has_many :messages
+  has_many :comments
 
   has_many :user_groups, dependent: :destroy
   has_many :groups, through: :user_groups
 
   has_one :admin_group, foreign_key: "admin_id"
 
-  acts_as_commontator
   acts_as_voter
 
   def feed
