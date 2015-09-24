@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.soulmate
 //= require bootstrap
 //= require chat
 //= require private_pub

@@ -1,7 +1,7 @@
 <h2>Friend Online</h2>
-<% current_user.following.each do |user| %>
-  <% if user.online? %>
-    <span class="glyphicon glyphicon-user text-success"></span>
+<% @user_list.each do |user| %>
+  <% if user.online? && (current_user?(user) != true) %>
     <%= link_to user.name, "#", class: "start-conversation", "data-sid" => current_user.id, "data-rid" => user.id %>
+    <span class="glyphicon glyphicon-user text-success pull-right"></span>
   <% end %>
 <% end %>

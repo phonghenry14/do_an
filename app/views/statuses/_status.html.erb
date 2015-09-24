@@ -32,7 +32,7 @@
       <%= comment.content %></br>
       <%= image_tag comment.picture.url if comment.picture? %>
       </br><%= time_ago_in_words(comment.created_at) %>
-      <%= link_to "delete", status_comment_path(status, comment), method: :delete, data: {confirm: "You sure?"} %>
+      <%= link_to "delete", status_comment_path(status, comment), method: :delete, data: {confirm: "You sure?"} if current_user? comment.user%>
       </br></br>
     <% end %>
   </span>
@@ -42,7 +42,7 @@
       <div class="field">
         <%= f.hidden_field :status_id, value: status.id %>
         <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.text_field :content, placeholder: "Compose new status..." %>
+        <%= f.text_field :content, placeholder: "Compose new comment..." %>
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
       </div>
     <%= f.submit "Comment", class: "btn btn-primary" %>
