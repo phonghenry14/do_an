@@ -15,6 +15,13 @@ class ApplicationController < ActionController::Base
   end
 
   def load_activity
-    @activities = PublicActivity::Activity.order('created_at DESC').limit(20)
+    @old_activities_count = @old_activities_count || 0
+    @activities = PublicActivity::Activity.where("recipient_id = ?", current_user.id).order('created_at DESC').limit(20)
+    @new_activities_count = @activities.count - @old_activities_count
+  end
+
+  def viewed_activity
+    @old_activities_count = @old_activities_count + @new_activities_count
+    @new_activities_count = 0
   end
 end

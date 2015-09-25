@@ -27,13 +27,15 @@
   Comments:</br>
   <span calss="comment">
     <% status.comments.each do |comment| %>
-      <%= gravatar_for comment.user, size: 15 %>
-      <%= link_to comment.user.name, comment.user %>:
-      <%= comment.content %></br>
-      <%= image_tag comment.picture.url if comment.picture? %>
-      </br><%= time_ago_in_words(comment.created_at) %>
-      <%= link_to "delete", status_comment_path(status, comment), method: :delete, data: {confirm: "You sure?"} if current_user? comment.user%>
-      </br></br>
+      <% if comment.id %>
+        <%= gravatar_for comment.user, size: 15 %>
+        <%= link_to comment.user.name, comment.user %>:
+        <%= comment.content %></br>
+        <%= image_tag comment.picture.url if comment.picture? %>
+        </br><%= time_ago_in_words(comment.created_at) %>
+        <%= link_to "delete", status_comment_path(status, comment), method: :delete, data: {confirm: "You sure?"} if current_user? comment.user%>
+        </br></br>
+      <% end %>
     <% end %>
   </span>
   <% @comment = Comment.new %>
