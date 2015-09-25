@@ -5,6 +5,7 @@ class StatusesController < ApplicationController
     @status = Status.find params[:id]
     @status.comments.build
     @user = current_user
+    @user_list = current_user.following
   end
 
   def create
