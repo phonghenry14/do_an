@@ -1,9 +1,10 @@
 class CommentsController < ApplicationController
 
   def create
-    @comment = Comment.new comment_params
-    if @comment.save
-      redirect_to :back
+    @comment = Comment.create! comment_params
+    respond_to do |format|
+      format.html { }
+      format.js
     end
   end
 
@@ -17,5 +18,4 @@ class CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit :status_id, :user_id, :content, :picture
   end
-
 end

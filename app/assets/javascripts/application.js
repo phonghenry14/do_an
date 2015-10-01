@@ -18,3 +18,12 @@
 //= require private_pub
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $('#notice').click(function() {
+    $.ajax({
+      url: '/activities/',
+      type: 'GET'
+    });
+  });
+});

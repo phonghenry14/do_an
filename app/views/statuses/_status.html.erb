@@ -25,21 +25,12 @@
   </span>
   Likes</br></br>
   Comments:</br>
-  <span calss="comment">
-    <% status.comments.each do |comment| %>
-      <% if comment.id %>
-        <%= gravatar_for comment.user, size: 15 %>
-        <%= link_to comment.user.name, comment.user %>:
-        <%= comment.content %></br>
-        <%= image_tag comment.picture.url if comment.picture? %>
-        </br><%= time_ago_in_words(comment.created_at) %>
-        <%= link_to "delete", status_comment_path(status, comment), method: :delete, data: {confirm: "You sure?"} if current_user? comment.user%>
-        </br></br>
-      <% end %>
-    <% end %>
+  <% @comments = status.comments %>
+  <span id="chat">
+    <%= render @comments %>
   </span>
-  <% @comment = Comment.new %>
-  <%= form_for [status, @comment] do |f| %>
+
+  <%= form_for Comment.new , remote: true do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
       <div class="field">
         <%= f.hidden_field :status_id, value: status.id %>
