@@ -3,7 +3,7 @@
   <aside class="col-md-3">
     <section class="user_info">
       <h1>
-        <%= gravatar_for @user %>
+        <%= image_tag(@user.avatar.url(:medium)) %>
         <%= @user.name %></br></br>
         <% if @user.online? %>
           <span class="glyphicon glyphicon-user text-success"></span>

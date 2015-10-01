@@ -24,6 +24,7 @@ gem "public_activity"
 gem 'soulmate', :require => 'soulmate/server'
 gem "rack-contrib"
 gem "redis-rails"
+gem "paperclip", "~> 4.3"
 
 group :development, :test do
   gem "pry-debugger"

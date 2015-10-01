@@ -3,8 +3,8 @@
   <aside class="col-md-4">
     <section class="user_info">
       <h1>
-        <%= gravatar_for @user %>
-        <%= @user.name %></br></br>
+        <%= image_tag(@user.avatar.url(:medium)) %>
+        </br><%= @user.name %></br></br>
         <% if @user.online? %>
           <span class="glyphicon glyphicon-user text-success"></span>
           Online
@@ -28,7 +28,7 @@
     <%= render 'follow_form' %>
     <% if @user.statuses.any? %>
       <h3>Statuses (<%= @user.statuses.status_not_group.count %>)</h3>
-      <ol class="statuses">
+      <ol class="sttuses">
         <%= render @statuses %>
       </ol>
       <%= will_paginate @statuses %>

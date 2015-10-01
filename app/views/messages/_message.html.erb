@@ -1,6 +1,6 @@
 <li class="media">
   <div class="media-left">
-    <%= gravatar_for message.user, size: 20, class: "media-object" %>
+    <%= image_tag message.user.avatar.url(:comment) %>
     <b><%= message.user.name %></b>
   </div>
   <div class="media-body">
