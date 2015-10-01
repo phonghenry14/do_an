@@ -1,5 +1,5 @@
 <li>
-  <%= gravatar_for user, size: 50 %>
+  <%= image_tag(user.avatar.url(:thumb)) %>
   <%= link_to user.name, user %>
   <%= link_to "Send message", "#", class: "btn btn-success start-conversation", "data-sid" => current_user.id, "data-rid" => user.id unless  current_user? user %>
 </li>

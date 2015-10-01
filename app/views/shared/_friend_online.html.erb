@@ -1,7 +1,8 @@
 <h2>Friend Online</h2>
 <% @user_list.each do |user| %>
   <% if user.online? && (current_user?(user) != true) %>
+    <%= image_tag user.avatar.url(:comment) %>
     <%= link_to user.name, "#", class: "start-conversation", "data-sid" => current_user.id, "data-rid" => user.id %>
-    <span class="glyphicon glyphicon-user text-success pull-right"></span>
+    <span class="glyphicon glyphicon-user text-success pull-right" style="margin-top: 5px;"></span>
   <% end %>
 <% end %>

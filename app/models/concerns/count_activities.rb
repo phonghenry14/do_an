@@ -5,10 +5,12 @@ module CountActivities
   end
 
   def load_activity
-    @activities = PublicActivity::Activity.where("recipient_id = ?", current_user.id).order('created_at DESC')
-    old_activity = Myapp::Redis.new.get("old_activity_#{current_user.id}")
-    new_activity = @activities.count - old_activity.to_i
-    Myapp::Redis.new.set("new_activity_#{current_user.id}", new_activity)
+    if user_signed_in?
+      @activities = PublicActivity::Activity.where("recipient_id = ?", current_user.id).order('created_at DESC')
+      old_activity = Myapp::Redis.new.get("old_activity_#{current_user.id}")
+      new_activity = @activities.count - old_activity.to_i
+      Myapp::Redis.new.set("new_activity_#{current_user.id}", new_activity)
+    end
   end
 
   def viewed_activity

@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include CountActivities
+  include Paperclip::Glue
 
   after_save :load_into_soulmate
   after_create :initialize_activity
@@ -28,6 +29,11 @@ class User < ActiveRecord::Base
   has_one :admin_group, foreign_key: "admin_id"
 
   acts_as_voter
+
+  has_attached_file :avatar,
+    :styles => { :medium => "200x200#", :thumb => "100x100#", :status => "50x50#", :comment => "30x30#" },
+    :default_url => ActionController::Base.helpers.asset_path('missing_:style.png')
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def feed
     following_ids = "SELECT followed_id FROM relationships
