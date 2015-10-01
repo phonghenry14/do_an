@@ -10,7 +10,7 @@
             <li id="fat-menu" class="dropdown">
               <a id="notice" href="#" class="dropdown-toggle" data-toggle="dropdown">
                 Notice
-                <span style="color: #FFF; background-color: #FF0000;"><%= @new_activities_count if (@new_activities_count != 0)  %></span>
+                <span id="count-activities" data-count="<% Myapp::Redis.new.get("new_activity_#{current_user.id}") %>" style="color: #FFF; background-color: #FF0000;"><%= Myapp::Redis.new.get("new_activity_#{current_user.id}") if Myapp::Redis.new.get("new_activity_#{current_user.id}") != "0" %></span>
               </a>
               <ul class="dropdown-menu">
                 <%= render "shared/activity" %>

@@ -23,6 +23,7 @@ gem "thin"
 gem "public_activity"
 gem 'soulmate', :require => 'soulmate/server'
 gem "rack-contrib"
+gem "redis-rails"
 
 group :development, :test do
   gem "pry-debugger"

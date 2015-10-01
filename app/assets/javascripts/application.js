@@ -25,5 +25,6 @@ $(function() {
       url: '/activities/',
       type: 'GET'
     });
+  $('#count-activities').html("");
   });
 });

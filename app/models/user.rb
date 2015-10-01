@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
+  include CountActivities
+
   after_save :load_into_soulmate
+  after_create :initialize_activity
   before_destroy :remove_from_soulmate
 
   devise :database_authenticatable, :registerable,
@@ -49,11 +52,7 @@ class User < ActiveRecord::Base
   end
 
   def online?
-    if current_sign_in_at.present?
-      last_sign_out_at.present? ? current_sign_in_at > last_sign_out_at : true
-    else
-      false
-    end
+    Myapp::Redis.new.exists("user_online_#{self.id}")
   end
 
   def self.search search
