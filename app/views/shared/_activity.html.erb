@@ -11,12 +11,14 @@
         <strong>Guest%></strong>
       <% end %>
       <%= render_activity activity, display: :i18n %>
-      <% if activity.trackable_type == "Status" %>
-        "<%= link_to activity.trackable.name, status_path(activity.trackable) %>"
-      <% elsif activity.trackable_type == "Comment" %>
-        "<%= activity.trackable.name %>"
-        in status
-        "<%= link_to activity.trackable.status.name, status_path(activity.trackable.status) %>"
+      <% if activity.trackable %>
+        <% if activity.trackable_type == "Status" %>
+          "<%= link_to activity.trackable.name, status_path(activity.trackable) %>"
+        <% elsif activity.trackable_type == "Comment" %>
+          "<%= activity.trackable.name %>"
+          in status
+          "<%= link_to activity.trackable.status.name, status_path(activity.trackable.status) %>"
+        <% end %>
       <% else %>
         with unknown title.
       <% end %>

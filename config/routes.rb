@@ -23,13 +23,11 @@ Rails.application.routes.draw do
         put "like", to: "statuses#like"
         put "unlike", to: "statuses#unlike"
     end
-    resources :comments do
-      member do
-        put "like", to: "comments#like"
-        put "unlike", to: "comments#unlike"
-      end
-    end
   end
+
+  resources :comments
+  resources :activities
+
   resources :relationships, only: [:create, :destroy] do
     member do
         put "follow", to: "relationships#follow"
