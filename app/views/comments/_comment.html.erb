@@ -1,7 +1,7 @@
 <% if comment.id %>
   <%= image_tag comment.user.avatar.url(:comment) %>
   <%= link_to comment.user.name, comment.user %>:
-  <%= comment.content %></br>
+  <%= best_in_place_if current_user?(comment.user), comment, :content, :ok_button => "ok", :ok_button_class => "btn btn-success ", :cancel_button => "X", :cancel_button_class => "btn btn-danger" %></br>
   <%= image_tag comment.picture.url if comment.picture? %>
   <%= time_ago_in_words(comment.created_at) %>
   <%= link_to "", comment_path(comment), method: :delete, data: {confirm: "You sure?"}, class: "glyphicon glyphicon-remove text-danger" if current_user? comment.user%>
