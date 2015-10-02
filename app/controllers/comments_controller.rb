@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  respond_to :html, :json
 
   def create
     @comment = Comment.create! comment_params
@@ -6,6 +7,12 @@ class CommentsController < ApplicationController
       format.html { }
       format.js
     end
+  end
+
+  def update
+    @comment = Comment.find params[:id]
+    @comment.update_attributes comment_params
+    respond_with @comment
   end
 
   def destroy

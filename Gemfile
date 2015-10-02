@@ -21,10 +21,11 @@ gem "acts_as_votable"
 gem "private_pub"
 gem "thin"
 gem "public_activity"
-gem 'soulmate', :require => 'soulmate/server'
+gem "soulmate", :require => "soulmate/server"
 gem "rack-contrib"
 gem "redis-rails"
 gem "paperclip", "~> 4.3"
+gem "best_in_place"
 
 group :development, :test do
   gem "pry-debugger"

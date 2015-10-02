@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  respond_to :html, :json
+
   def index
     @users = User.search params[:search]
     @groups = params[:search].present? ? Group.search(params[:search]) : nil
@@ -9,6 +11,12 @@ class UsersController < ApplicationController
     @user = User.find params[:id]
     @statuses = @user.statuses.status_not_group.paginate page: params[:page]
     @user_list = current_user.following
+  end
+
+  def update
+    @user = User.find params[:id]
+    @user.update_attributes(name: params[:user][:name])
+    respond_with @user
   end
 
   def following

@@ -1,6 +1,6 @@
 <h1>
   <%= image_tag current_user.avatar.url(:medium) %>
-  </br><%= current_user.name %>
+  </br><%= best_in_place current_user, :name, :ok_button => "ok", :ok_button_class => "btn btn-success ", :cancel_button => "X", :cancel_button_class => "btn btn-danger" %>
 </h1>
 <span><%= link_to "view my profile", current_user %></span>
 <span><%= pluralize(current_user.statuses.status_not_group.count, "status") %></span>

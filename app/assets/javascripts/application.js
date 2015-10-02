@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require best_in_place
 //= require jquery.soulmate
 //= require bootstrap
 //= require chat
@@ -27,4 +28,9 @@ $(function() {
     });
   $('#count-activities').html("");
   });
+});
+
+
+$(document).ready(function() {
+  jQuery(".best_in_place").best_in_place();
 });

@@ -1,5 +1,6 @@
 class StatusesController < ApplicationController
   before_action :correct_user, only: :destroy
+  respond_to :html, :json
 
   def show
     @status = Status.find params[:id]
@@ -21,9 +22,8 @@ class StatusesController < ApplicationController
 
   def update
     @status = Status.find params[:id]
-    if @status.update_attributes status_params
-      redirect_to :back
-    end
+    @status.update_attributes status_params
+    respond_with @status
   end
 
   def destroy
