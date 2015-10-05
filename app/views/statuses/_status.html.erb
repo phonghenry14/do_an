@@ -38,10 +38,15 @@
       <div class="field">
         <%= f.hidden_field :status_id, value: status.id %>
         <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.text_field :content, placeholder: "Compose new comment..." %>
+        <%= f.text_area :content, placeholder: "Compose new comment..." %>
         <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
       </div>
     <%= f.submit "Comment", class: "btn btn-primary" %>
   <% end %>
 </li>
 </br>
+
+<script>
+  data = <%= raw User.pluck(:name).compact.to_json %>;
+  $('textarea').atwho({at:"@", 'data':data});
+</script>
