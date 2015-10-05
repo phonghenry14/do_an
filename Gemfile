@@ -26,6 +26,7 @@ gem "rack-contrib"
 gem "redis-rails"
 gem "paperclip", "~> 4.3"
 gem "best_in_place"
+gem "jquery-atwho-rails"
 
 group :development, :test do
   gem "pry-debugger"

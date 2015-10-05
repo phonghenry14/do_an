@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require best_in_place
+//= require jquery.atwho
 //= require jquery.soulmate
 //= require bootstrap
 //= require chat
