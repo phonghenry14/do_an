@@ -46,6 +46,10 @@
               <% p.hidden_field :picture, value: p.object.picture %>
             <% else%>
               <div class="field">
+                <span class="task">
+                  <%= p.label :task %>
+                  <%= p.select :task, {"False" => false, "True" => true} %>
+                </span>
                 <%= p.hidden_field :user_id, value: current_user.id %>
                 <%= p.text_area :content, placeholder: "Compose new status...", class: "form-control" %>
                 <span class="picture">

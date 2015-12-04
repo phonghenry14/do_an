@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151104011945) do
+ActiveRecord::Schema.define(version: 20151204021707) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -85,6 +85,8 @@ ActiveRecord::Schema.define(version: 20151104011945) do
     t.datetime "updated_at",               null: false
     t.string   "picture",    limit: 255
     t.integer  "group_id",   limit: 4
+    t.boolean  "task",       limit: 1
+    t.boolean  "done",       limit: 1
   end
 
   add_index "statuses", ["user_id", "created_at"], name: "index_statuses_on_user_id_and_created_at", using: :btree

@@ -36,6 +36,11 @@ class StatusesController < ApplicationController
     @status = Status.find params[:id]
     @status.liked_by current_user
     @status.create_activity key: "status.like"
+    if @status.get_likes.size == (@status.try(:group).users.count)
+      @status.done = true
+      @status.save
+      @status.create_activity key: "status.like"
+    end
     if request.xhr?
       render json: {count: @status.get_likes.size, id: params[:id]}
     else
@@ -47,6 +52,10 @@ class StatusesController < ApplicationController
     @status= Status.find params[:id]
     @status.unliked_by current_user
     @status.create_activity key: "status.unlike"
+    if @status.get_likes.size < (@status.try(:group).users.count)
+      @status.done = false
+      @status.save
+    end
     if request.xhr?
       render json: {count: @status.get_likes.size, id: params[:id]}
     else
