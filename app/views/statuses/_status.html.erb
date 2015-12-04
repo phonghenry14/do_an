@@ -1,4 +1,15 @@
-<li id="<%= status.id %>">
+<% if status.task %>
+  <li id="<%= status.id %>" style="background-color: lightblue;">
+  <span class="done">
+    <% if status.done %>
+      <div style="background-color: green;">----------- TASK DONE -----------</div>
+    <% else %>
+      <div style="background-color: yellow;">----------- TASK IN PROGRESS -----------</div>
+    <% end %>
+  </span></br>
+<% else %>
+  <li id="<%= status.id %>">
+<% end %>
   <span class="avatar">
     <%= image_tag(status.user.avatar.url(:status)) %>
   </span>

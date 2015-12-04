@@ -6,6 +6,7 @@ en:
       update: "has edited the status"
       like: "has liked the status"
       unlike: "has unlike the status"
+      done: "task done"
     comment:
       create: "has comment"
       destroy: "has removed comment"
