@@ -88,6 +88,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    devise-encryptable (0.2.0)
+      devise (>= 2.1.0)
     em-http-request (1.1.2)
       addressable (>= 2.3.4)
       cookiejar
@@ -365,6 +367,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   commontator
   devise
+  devise-encryptable
   faker
   fog (= 1.26.0)
   jbuilder (~> 2.0)

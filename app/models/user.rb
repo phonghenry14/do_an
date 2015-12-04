@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         stretches: 20
+         :encryptable, stretches: 20
 
   has_many :statuses, dependent: :destroy
   has_many :active_relationships, class_name:  "Relationship",

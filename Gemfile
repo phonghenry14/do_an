@@ -27,6 +27,7 @@ gem "redis-rails"
 gem "paperclip", "~> 4.3"
 gem "best_in_place"
 gem "jquery-atwho-rails"
+gem "devise-encryptable"
 
 group :development, :test do
   gem "pry-debugger"
