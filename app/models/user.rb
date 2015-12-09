@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   has_many :conversations, foreign_key: :sender_id
   has_many :messages
   has_many :comments
+  has_many :tasks
 
   has_many :user_groups, dependent: :destroy
   has_many :groups, through: :user_groups
