@@ -1,6 +1,8 @@
 <h3>Group Manager</h3>
 <%= link_to "Create New Group", new_group_path, class: "btn btn-success" %></br>
-<h4>Groups list:</h4>
-<% current_user.groups.each do |group| %>
-  <li><%= link_to group.name, group %></li>
+<% unless current_user.groups.count == 0 %>
+  <h4>Groups list:</h4>
+  <% current_user.groups.each do |group| %>
+    <li><%= link_to group.name, group %></li>
+  <% end %>
 <% end %>

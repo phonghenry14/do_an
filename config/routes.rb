@@ -43,4 +43,9 @@ Rails.application.routes.draw do
     resource :user_groups
     get "add_members" => "user_groups#show"
   end
+
+  resources :events do
+    resource :user_events
+    get "add_members" => "user_events#show"
+  end
 end

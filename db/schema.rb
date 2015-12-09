@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151204021707) do
+ActiveRecord::Schema.define(version: 20151209072737) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -46,6 +46,16 @@ ActiveRecord::Schema.define(version: 20151204021707) do
     t.integer  "receiver_id", limit: 4
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.text     "description", limit: 65535
+    t.datetime "time_start"
+    t.datetime "time_end"
+    t.integer  "admin_id",    limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "groups", force: :cascade do |t|
@@ -87,10 +97,18 @@ ActiveRecord::Schema.define(version: 20151204021707) do
     t.integer  "group_id",   limit: 4
     t.boolean  "task",       limit: 1
     t.boolean  "done",       limit: 1
+    t.integer  "event_id",   limit: 4
   end
 
   add_index "statuses", ["user_id", "created_at"], name: "index_statuses_on_user_id_and_created_at", using: :btree
   add_index "statuses", ["user_id"], name: "index_statuses_on_user_id", using: :btree
+
+  create_table "user_events", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "event_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "user_groups", force: :cascade do |t|
     t.integer  "user_id",    limit: 4

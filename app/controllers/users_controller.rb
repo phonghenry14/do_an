@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find params[:id]
-    @statuses = @user.statuses.status_not_group.paginate page: params[:page]
+    @statuses = @user.statuses.status_not_group_and_event.paginate page: params[:page]
     @user_list = current_user.following
   end
 

@@ -31,12 +31,18 @@ class GroupsController < ApplicationController
   end
 
   def update
-    if @group.update_attributes group_params
-      flash[:success] = "Edited success"
-      redirect_to @group
+    unless params[:confirm]
+      if @group.update_attributes group_params
+        flash[:success] = "Edited success"
+        redirect_to @group
+      else
+        flash[:danger] = "Edit failed"
+        render :edit
+      end
     else
-      flash[:danger] = "Edit failed"
-      render :edit
+      @group.user_groups.find_by_user_id(current_user.id).destroy
+      flash[:success] = "Leave group successfully"
+      redirect_to root_path
     end
   end
 
