@@ -20,8 +20,15 @@ Rails.application.routes.draw do
   end
   resources :statuses do
     member do
-        put "like", to: "statuses#like"
-        put "unlike", to: "statuses#unlike"
+      put "like", to: "statuses#like"
+      put "unlike", to: "statuses#unlike"
+    end
+  end
+
+  resources :tasks do
+    member do
+      put "like", to: "tasks#like"
+      put "unlike", to: "tasks#unlike"
     end
   end
 

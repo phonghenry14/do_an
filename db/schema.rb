@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151209072737) do
+ActiveRecord::Schema.define(version: 20151209092922) do
 
   create_table "activities", force: :cascade do |t|
     t.integer  "trackable_id",   limit: 4
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20151209072737) do
     t.string   "picture",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "task_id",    limit: 4
   end
 
   add_index "comments", ["status_id"], name: "index_comments_on_status_id", using: :btree
@@ -102,6 +103,17 @@ ActiveRecord::Schema.define(version: 20151209072737) do
 
   add_index "statuses", ["user_id", "created_at"], name: "index_statuses_on_user_id_and_created_at", using: :btree
   add_index "statuses", ["user_id"], name: "index_statuses_on_user_id", using: :btree
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.text     "content",    limit: 65535
+    t.integer  "user_id",    limit: 4
+    t.integer  "group_id",   limit: 4
+    t.datetime "deadline"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.boolean  "done",       limit: 1
+  end
 
   create_table "user_events", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
