@@ -5,6 +5,7 @@ class Status < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :group
+  belongs_to :event
 
   has_many :comments, dependent: :destroy
 
@@ -20,8 +21,9 @@ class Status < ActiveRecord::Base
 
   acts_as_votable
 
-  scope :status_not_group, ->{where group_id: nil}
+  scope :status_not_group_and_event, ->{where group_id: nil, event_id: nil}
   scope :status_in_group, ->(group_id){where group_id: group_id}
+  scope :status_in_event, ->(event_id){where event_id: event_id}
 
   def name
     content.split(//).first(30).join

@@ -25,6 +25,8 @@ class User < ActiveRecord::Base
 
   has_many :user_groups, dependent: :destroy
   has_many :groups, through: :user_groups
+  has_many :user_events, dependent: :destroy
+  has_many :events, through: :user_events
 
   has_one :admin_group, foreign_key: "admin_id"
 
@@ -38,7 +40,7 @@ class User < ActiveRecord::Base
   def feed
     following_ids = "SELECT followed_id FROM relationships
                      WHERE  follower_id = :user_id"
-    Status.status_not_group.where("user_id IN (#{following_ids})
+    Status.status_not_group_and_event.where("user_id IN (#{following_ids})
                      OR user_id = :user_id", user_id: id)
   end
 

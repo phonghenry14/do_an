@@ -1,0 +1,8 @@
+<h3>Event</h3>
+<%= link_to "Create New Event", new_event_path, class: "btn btn-success" %></br>
+<% unless current_user.events.count == 0 %>
+  <h4>Events list:</h4>
+  <% current_user.events.each do |event| %>
+    <li><%= link_to event.name, event %></li>
+  <% end %>
+<% end %>
