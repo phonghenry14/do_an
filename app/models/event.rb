@@ -6,4 +6,10 @@ class Event < ActiveRecord::Base
 
   accepts_nested_attributes_for :user_events, allow_destroy: :true
   accepts_nested_attributes_for :statuses, allow_destroy: :true
+
+  class << self
+    def remove_old_event
+      where("time_end < ?", DateTime.now).destroy_all
+    end
+  end
 end

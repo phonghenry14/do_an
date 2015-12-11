@@ -4,10 +4,17 @@ class EventsController < ApplicationController
   def show
     @admin = @event.admin
     @event.statuses.build
-    @feeds = []
+    @admin_feeds = []
+    @member_feeds = []
     @event.users.each do|user|
-      user.statuses.status_in_event(@event.id).each do |status|
-        @feeds << status
+      if user == @event.admin
+        user.statuses.status_in_event(@event.id).each do |status|
+          @admin_feeds << status
+        end
+      else
+        user.statuses.status_in_event(@event.id).each do |status|
+          @member_feeds << status
+        end
       end
     end
     @user_list = @event.users

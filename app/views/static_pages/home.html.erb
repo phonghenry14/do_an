@@ -13,20 +13,21 @@
       <section class="group">
         <%= render 'shared/group' %>
       </section>
+      <section>
+        <%= render 'shared/friend_online' %>
+      </section>
     </aside>
-    <aside class="col-md-7">
+    <aside class="col-md-5">
       <h3>Statuses Feed</h3>
       <section class="micropost_form">
         <%= render 'shared/status_form' %>
       </section>
       <%= render 'shared/feed' %>
     </aside>
-    <aside class="col-md-2">
-      <section>
-        <%= render 'shared/friend_online' %>
-      </section>
+    <aside class="col-md-4">
       <section class="event">
         <%= render 'shared/event' %>
+        <%= render 'shared/feed_events' %>
       </section>
     </aside>
   </div>
