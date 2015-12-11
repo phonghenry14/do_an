@@ -12,5 +12,4 @@ class Task < ActiveRecord::Base
 
   scope :task_in_group, ->(group_id){where group_id: group_id}
 
-  acts_as_votable
 end

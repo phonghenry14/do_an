@@ -98,7 +98,7 @@
         <%= f.submit "Create", class: "btn btn-primary" %>
       <% end %>
     </section>
-    <ol class="sttuses">
+    <ol class="tasks">
       <% @tasks.each do |task| %>
         <%= render 'tasks/task', task: task %>
       <% end %>
