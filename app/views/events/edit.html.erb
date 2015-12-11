@@ -6,7 +6,7 @@
     </div>
   <% end %>
 <% else %>
-  <%= form_for @group do |f| %>
+  <%= form_for @event do |f| %>
     <div class="field">
       <%= f.label :eventname %><br/>
       <%= f.text_field :name, autofocus: true %>

@@ -28,6 +28,7 @@ gem "paperclip", "~> 4.3"
 gem "best_in_place"
 gem "jquery-atwho-rails"
 gem "devise-encryptable"
+gem "whenever", require: false
 
 group :development, :test do
   gem "pry-debugger"
