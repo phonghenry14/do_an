@@ -1,9 +1,18 @@
-<li id="<%= task.id %>">
-  <span class="user">
-    Assignee:
-    <%= link_to task.user.name, task.user %>
+<% if task.done %>
+  <li id="<%= task.id %>" style="background-color: lightblue;">
+  <h4 style="background-color: green;">Task Done</h4>
+<% else %>
+  <li id="<%= task.id %>">
+  <%= form_for task do |f| %>
+    <%= f.label :status, "Status" %>
+    <%= f.select :done, {"True" => :true, "False" => :false} %>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+  <span class="name">
+    Name:
+    <%= best_in_place_if current_user?(task.group.admin), task, :name, :ok_button => "ok", :ok_button_class => "btn btn-success ", :cancel_button => "X", :cancel_button_class => "btn btn-danger" %></br>
   </span>
-  <br>
   <span class="timestamp text-success">
     <%= link_to "Posted #{time_ago_in_words(task.created_at)} ago.", task %>
     <% if current_user? task.group.admin %>
@@ -11,27 +20,21 @@
     <% end %>
   </span></br></br>
   <span class="content">
-     Name:
-     <%= best_in_place_if current_user?(task.group.admin), task, :name, :ok_button => "ok", :ok_button_class => "btn btn-success ", :cancel_button => "X", :cancel_button_class => "btn btn-danger" %></br>
     Content:
     <%= best_in_place_if current_user?(task.group.admin), task, :content, :ok_button => "ok", :ok_button_class => "btn btn-success ", :cancel_button => "X", :cancel_button_class => "btn btn-danger" %></br>
+  </span></br>
+  <span class="user">
+    Assignee:
+    <%= link_to task.user.name, task.user %>
+  </span>
+  <br>
+  <span class="deadline">
     Deadline:
     <%= task.deadline %>
-  </span></br>
-  <span>
-    <% if current_user.liked? task %>
-      <%= link_to "Unlike", unlike_task_path(task), class: 'vote', method: :put, remote: true, data: { toggle_text: 'Like', toggle_href: like_task_path(task), id: task.id } %>
-    <% else %>
-      <%= link_to "Like", like_task_path(task), class: 'vote', method: :put, remote: true, data: { toggle_text: 'Unlike', toggle_href: unlike_task_path(task), id: task.id } %>
-    <% end %>
-  </span>
-  <span class="votes-count" data-id="<%= task.id %>">
-    <%= task.get_likes.size %>
-  </span>
-  Likes</br></br>
+  </span></br></br>
   Comments:</br>
   <% @comments = task.comments %>
-  <span id="chat">
+  <span id="task-comment">
     <%= render @comments %>
   </span>
 

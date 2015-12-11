@@ -1,3 +1,9 @@
-<% publish_to "/comments/new" do %>
-  $("#chat").append("<%= j render(@comment) %>");
+<% if @comment.status_id %>
+  <% publish_to "/comments/new" do %>
+    $("#status-comment").append("<%= j render(@comment) %>");
+  <% end %>
+<% elsif @comment.task_id %>
+  <% publish_to "/comments/new" do %>
+    $("#task-comment").append("<%= j render(@comment) %>");
+  <% end %>
 <% end %>
