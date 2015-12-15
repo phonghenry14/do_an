@@ -96,8 +96,6 @@ ActiveRecord::Schema.define(version: 20151209092922) do
     t.datetime "updated_at",               null: false
     t.string   "picture",    limit: 255
     t.integer  "group_id",   limit: 4
-    t.boolean  "task",       limit: 1
-    t.boolean  "done",       limit: 1
     t.integer  "event_id",   limit: 4
   end
 
