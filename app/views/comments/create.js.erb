@@ -1,9 +1,9 @@
-<% if @comment.status_id %>
-  <% publish_to "/comments/new" do %>
-    $("#status-comment").append("<%= j render(@comment) %>");
-  <% end %>
-<% elsif @comment.task_id %>
-  <% publish_to "/comments/new" do %>
-    $("#task-comment").append("<%= j render(@comment) %>");
+<% publish_to "/comments/new" do %>
+  <% if @comment.status_id %>
+    $("#status-comment<%= @comment.status_id %>").append("<%= j render(@comment) %>");
+    $("#form-status form textarea").val("");
+  <% elsif @comment.task_id %>
+    $("#task-comment<%= @comment.task_id %>").append("<%= j render(@comment) %>");
+    $("#form-task textarea").val("");
   <% end %>
 <% end %>

@@ -34,20 +34,21 @@
   </span></br></br>
   Comments:</br>
   <% @comments = task.comments %>
-  <span id="task-comment">
+  <span id="task-comment<%= task.id %>">
     <%= render @comments %>
   </span>
-
-  <%= form_for Comment.new , remote: true do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-      <div class="field">
-        <%= f.hidden_field :task_id, value: task.id %>
-        <%= f.hidden_field :user_id, value: current_user.id %>
-        <%= f.text_area :content, placeholder: "Compose new comment..." %>
-        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-      </div>
-    <%= f.submit "Comment", class: "btn btn-primary" %>
-  <% end %>
+  <span id="form-task">
+    <%= form_for Comment.new , remote: true do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+        <div class="field">
+          <%= f.hidden_field :task_id, value: task.id %>
+          <%= f.hidden_field :user_id, value: current_user.id %>
+          <%= f.text_area :content, placeholder: "Compose new comment...", class: "form-control" %>
+          <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+        </div>
+      <%= f.submit "Comment", class: "btn btn-primary" %>
+    <% end %>
+  </span>
 </li>
 </br>
 
